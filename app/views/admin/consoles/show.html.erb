@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @admin_console.product %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @admin_console.name %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @admin_console.slug %>
+</p>
+
+<p>
+  <strong>Available:</strong>
+  <%= @admin_console.available %>
+</p>
+
+<%= link_to 'Edit', edit_admin_console_path(@admin_console) %> |
+<%= link_to 'Back', admin_consoles_path %>

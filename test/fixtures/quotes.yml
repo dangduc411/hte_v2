@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client_id: 
+  console_id: 
+  note: MyText
+  duration: 1
+  processed: false
+
+two:
+  client_id: 
+  console_id: 
+  note: MyText
+  duration: 1
+  processed: false

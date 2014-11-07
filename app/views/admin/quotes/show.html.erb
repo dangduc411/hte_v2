@@ -1,0 +1,45 @@
+<% content_for :page_heading do %>
+  Đơn Hàng
+<% end %>
+
+<h4>Khách Hàng</h4>
+<address>
+  <strong><%= @quote.name %></strong>
+  <br><%= @quote.address %>
+  <br>
+  <abbr title="Phone">P:</abbr><%= @quote.phone %>
+</address>
+
+<% if @quote.duration.present? %>
+<h4>Thời gian thuê</h4>
+	<% if @quote.duration == 1 %>
+		<p>3 Ngay </p>
+	<% elsif @quote.duration > 1 %>
+		<p><%= @quote.duration - 1 %>tuan</p>
+	<% end %>
+<% end %>
+
+<% if @quote.console %>
+<h4>Máy Game</h4>
+<p><%= @quote.console.name_with_product %></p>
+<% end %>
+
+<% if @quote.note.present? %>
+<h4>Yêu cầu</h4>
+<%= simple_format @quote.note %>
+<% end %>
+
+<h4>Trạng thái</h4>
+<% if @quote.pending? %>
+<p>Chờ xử lý</p>
+<% elsif @quote.completed? %>
+<p>Đã xử lý</p>
+<% elsif @quote.cancelled? %>
+<p>Đã huỷ</p>
+<% end %>
+
+
+<% if @quote.pending? %>
+  <%= link_to 'Tạo hợp đồng', new_admin_contract_path(quote_id: @quote.id), class: 'btn btn-lg btn-primary' %>
+  <%= link_to 'Huỷ đơn hàng', cancel_admin_quote_path(@quote), class: 'btn btn-lg btn-danger', data: {confirm: 'Bạn có chắc chắn huỷ đơn hàng này?'}, method: :post %>
+<% end %>

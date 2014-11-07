@@ -1,0 +1,14 @@
+h1, h2, h3, h4, h5, h6 {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+p {
+  line-height: 1.7;
+}
+section {
+  margin-bottom: 30px;
+}
+
+.blue-text {
+  color: darken(#f5ffff, 10%);
+}

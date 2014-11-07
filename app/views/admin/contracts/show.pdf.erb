@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+	  p 
+	  {
+	  	font-size: 1.7em;
+	  }
+	  table
+	  {
+	  	font-size: 1.7em
+	  }
+  </style>
+</head>
+<body>
+<p style='text-align:center;'>CỘNG HOÀ XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+<p style='text-align:center; margin-top: -10px'>Độc Lập - Tự Do - Hạnh Phúc</p>	
+<p style='text-align:center; margin-top: -10px'>———</p>
+<h1><p style='text-align:center; margin-top: -20px; margin-bottom: -15px'>HỢP ĐỒNG THUÊ THIẾT BỊ</p></h1>
+<p style='text-align:center'>SỐ:<%= @contract.number %></p>
+
+
+<p>- Căn cứ vào Bộ Luật Dân sự hiện hành số 33/2005/QH11 ngày 14/06/2005 có hiệu lực ngày 01/01/2006 và Bộ Luật Thương mại số 36/2005/QH11 ngày 14/06/2005 có hiệu lực từ ngày 01/01/2006 của Quốc hội nước Cộng hòa Xã hội Chủ nghĩa Việt Nam;</p>
+<p>- Căn cứ vào nhu cầu và năng lực của mỗi bên</p>
+
+<p>Hôm nay, ngày <%= Time.now.day %> tháng <%= Time.now.month %> năm <%= Time.now.year %></p>
+<p>Tại CÔNG TY TNHH TM-DV HTE, chúng tôi gồm:</p>
+<br>
+
+<p style='font-weight: bold;'>Bên A: (Bên cho thuê): CÔNG TY TNHH TM-DV HTE</p>
+<p>Đại diện: Ông.Nghiêm Xuân Hoàng</p>
+<p>Chức vụ: Giám đốc</p>
+<p>Địa chỉ: 98 Thích Quảng Đức, Phường 5, Quận Phú Nhuận, TP.HCM</p>
+<p>Điện thoại: (08) 6292 1939</p>
+<p>Mã số thuế: 0311996915</p>
+<br>
+<p style='font-weight: bold;'>Bên B(Bên thuê):………………………………………………………………………………………………………………………</p>
+<p>Địa chỉ:…………………………………………………………………………………………………………………………………</p>
+<p>Điện thoại:…………………………………………………………………………………………………………………………</p>
+<p>Số CMND:…………………………… Ngày cấp:…………………………………… Nơi cấp:……………………………………</p>
+<br>
+<p style='font-weight: bold;'>Hai bên thống nhất với nội dung sau:</p>
+<br>
+<u><p style='font-weight: bold;'>Điều 1: Mục đích</p></u>
+
+<p>Bên A đồng ý cho Bên B thuê máy game PlayStation 3 cho mục đích giải trí.</p>
+<p>Máy móc thiết bị bao gồm:</p>
+<% index=0 %>
+<table width=100% border=1 rules="all">
+	<thead>
+	<tr>
+		<td width=80px align="center">Số TT</td>
+		<td>Tên Thiết Bị</td>
+		<td>Số Lượng</td>
+	</tr>
+	</thead>
+	<tbody>
+	<% re = 0 %>
+	<tr>
+		<% @contract.items.each do |a| %>
+			<% if re == 1 %>
+				<tr>
+			<% end %>
+			<td align="center"><%= index = index + 1 %></td>
+			<td><%= a.product.name %></td>
+			<td><%= a.quantity %><% re = 1 %></td>
+	</tr>
+		<% end %>
+
+	<tr>
+		<td align="center"><%= index=index+1 %></td>
+		<td>Dây HDMI</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td align="center"><%= index=index+1 %></td>
+		<td>Dây Sạc USB</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td align="center"><%= index=index+1 %></td>
+		<td>Dây Nguồn</td>
+		<td>1</td>
+	</tr>
+	</tbody>
+</table>
+
+<u><p style='font-weight: bold'>Điều 2: Địa điểm giao thiết bị và thời gian thuê</p></u>
+	<p>Bên A giao thiết bị cho bên B tại địa chỉ:</p>
+<div>
+	<p style='margin-bottom: -25px; padding-bottom: 0px'>………………………………………………………………………………………………………………………………………………………………………………………………………………</p>
+</div>
+<p>Thời hạn thuê  Từ: <%= @contract.delivery_date.strftime("%d/%m/%Y") %>		&nbsp Đến: <%= @contract.complete_date.strftime("%d/%m/%Y") %></p>
+
+<u><p style='font-weight: bold;'>Điều 3: Giá trị hợp đồng và hình thức thanh toán</p></u>
+<p style='font-weight: bold;'>3.1 Giá trị hợp đồng</p>
+<p>Tổng giá trị hợp đồng: <%= number_to_currency @contract.total, precision: 0 %></p>
+
+<p style='font-weight: bold;'>3.2 Phương thức thanh toán</p>
+<p>Thanh toán bằng tiền mặt khi nhận máy.</p>
+
+<u><p style='font-weight: bold;'>Điều 4: Trách nhiệm mỗi bên</p></u>
+<p style='font-weight: bold;'>4.1 Trách nhiệm bên A:</p>
+<p>Đảm bảo thiết bị hoạt động tốt khi bàn giao</p>
+<p style='font-weight: bold;'>4.2 Trách nhiệm bên B:</p>
+<p>- Nhận máy và sử dụng đúng quy trình kỹ thuật.</p>
+<p>- Tự chịu trách nhiệm rủi ro khi sử dụng máy móc, thiết bị thuê.</p>
+<p>- Đảm bảo thực hiện đúng theo Điều 2 nêu trên.</p>
+<p>- Khi xảy ra hỏng hóc, bên B phải thông báo ngay cho bên A để bên A tiến hành kiểm tra thiết bị. Nếu lỗi phát sinh do sử dụng không đúng kỹ thuật, cháy nổ, thiên tai bên B phải chịu trách nhiệm bồi thường cho bên A theo mức độ thiệt hại.</p>
+<u><p style='font-weight: bold;'>Điều 5: Trách nhiệm do vi phạm hợp đồng</p></u>
+<p style='font-weight: bold;'>5.1 Vi phạm hợp đồng là việc một Bên không thực hiện hoặc thực hiện không đầy đủ nghĩa vụ hoặc cam kết của mình theo Hợp đồng.</p>
+<p style='font-weight: bold;'>5.2 Bên vi phạm hợp đồng phải trả cho bên bị vi phạm tiền phạt vi phạm hợp đồng và trong trường  hợp có thiệt hại thì phải bồi thường thiệt hại theo quy định sau đây:</p>
+<p>- Tiền bồi thường thiệt hại bao gồm giá trị số tài sản mất mát, hư hỏng, số chi phí để ngăn chặn và hạn chế thiệt hại vi phạm gây ra; Hoặc tiền phạt vi phạm hợp đồng và tiền bồi thường thiệt hại mà bên bị vi phạm đã phải trả cho bên thứ ba là hậu quả trực tiếp của sự vi phạm này gây ra.</p>
+
+<u><p style='font-weight: bold;'>Điều 6: Chấm dứt hợp đồng</p></u>
+<p>Hợp đồng thuê thiết bị này chỉ có thể bị chấm dứt bởi một trong những trường hợp sau đây:</p>
+<p>- Hết hạn thuê theo hợp đồng;</p>
+<p>- Theo yêu cầu của một trong hai bên;</p>
+<p>- Lý do bất khả kháng khác.</p>
+<p>Khi chấm dứt việc thực hiện hợp đồng các bên sẽ tiến hành thanh lý, hoàn trả máy móc thiết bị, thanh toán mọi khoản tài chính liên quan.</p>
+
+<u><p style='font-weight: bold;'>Điều 7: Giải quyết tranh chấp</p></u>
+<p>Hai bên cam kết thực hiện nghiêm túc đầy đủ các điều khoản đã ghi trong hợp đồng này. Trong quá trình thực hiện có gì vướng mắc hai bên cùng bàn bạc trên tinh thần hữu nghị hợp tác. Trong trường hợp hai bên không thể tự thoả thuận được thì sẽ đưa vụ việc ra Toà án nhân dân có thẩm quyền tại Thành Phố Hồ Chí Minh để giải quyết theo pháp luật Việt Nam.</p>
+<br>
+<p>Hợp đồng được lập thành 2 bản, mỗi bên giữ 1 bản có giá trị pháp lý như nhau và có hiệu lực kể từ ngày ký.</p>
+
+<div >
+	<p style="float:left; padding-left:50px">Đại diện Bên A</p>
+	<p style="float:right; padding-right: 50px">Đại diện Bên B</p>
+</div>
+<div style="clear:both; height: 100px"></div>
+<div style="float:left;padding-left:30px"><p>Nghiêm Xuân Hoàng</p></div>
+<%#= b.attributes.each{|key, value| puts "#{key} : #{value}"} %>
+</body>
+</html>

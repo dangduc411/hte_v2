@@ -1,0 +1,32 @@
+<% content_for :page_heading do %>
+  Games
+  <%= link_to new_admin_game_path, class: 'btn btn-default pull-right' do %>
+    <i class="fa fa-plus fa-fw"></i> Tạo Game Mới
+  <% end %>
+<% end %>
+
+<% if @admin_games.any? %>
+  <table class="table table-striped table-bordered table-hover table-data">
+    <thead>
+      <tr>
+        <th>Tên Game</th>
+        <th>PSN Link</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @admin_games.each do |game| %>
+        <tr>
+          <td><%= link_to game.name, [:edit, :admin, game] %></td>
+          <td><%= game.psn_link %></td>
+          <td><%= link_to 'Xoá', [:admin, game], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-warning">
+    Chưa có dữ liệu.
+  </div>
+<% end %>

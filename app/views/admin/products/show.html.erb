@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @admin_product.name %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @admin_product.slug %>
+</p>
+
+<p>
+  <strong>Rental price:</strong>
+  <%= @admin_product.rental_price %>
+</p>
+
+<p>
+  <strong>Selling price:</strong>
+  <%= @admin_product.selling_price %>
+</p>
+
+<p>
+  <strong>Deposit price:</strong>
+  <%= @admin_product.deposit_price %>
+</p>
+
+<p>
+  <strong>Sales price:</strong>
+  <%= @admin_product.sales_price %>
+</p>
+
+<%= link_to 'Edit', edit_admin_product_path(@admin_product) %> |
+<%= link_to 'Back', admin_products_path %>

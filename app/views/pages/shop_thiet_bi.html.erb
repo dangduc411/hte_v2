@@ -1,0 +1,16 @@
+<div class="page-header">
+	<h1>Shop Thiết Bị</h1>
+</div>
+<div class="console">
+	<% @devices.each do |device| %>
+		<div class="thumbnail" style="min-height: 240px; position: relative;">
+			<p style="text-align: center; font-weight:bold"><%= device.display_name %></p>
+			<%= image_tag (device.product_photo_url) %>
+			<% if device.selling_price == nil %>
+				<p style="position: absolute; bottom: 5px; text-align: center; width: 100%;">Pre Order</p>
+			<% else %>
+				<p style="position: absolute; bottom: 5px; text-align: center; width: 100%; font-weight:bold"><%= number_to_currency device.selling_price, unit: 'đ', precision: 0%></p>
+			<% end %>
+		</div>
+	<% end %>
+</div>

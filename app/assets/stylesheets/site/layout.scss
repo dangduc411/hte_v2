@@ -1,0 +1,254 @@
+@import 'site/variables';
+@import 'site/mixin';
+@import 'site/fonts';
+
+body {
+  @include full-background('bg.jpg');
+  color: $hte-text-color;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  min-width: 1100px;
+}
+
+#wrapper {
+  display: table;
+  margin: 40px;
+}
+
+#sidebar {
+  min-width: 300px;
+  display: table-cell;
+  vertical-align: top;
+}
+#sidebar-bg {
+  background: #000;
+  background: rgba(0,0,0,0.5);
+  min-height: 600px;
+  margin-right: 40px;
+  text-align: center;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(237,237,237,1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(237,237,237,1);
+  box-shadow: 0px 0px 10px 0px rgba(237,237,237,1);
+  position: relative;
+}
+
+#logo {
+  display: block;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+#content {
+  display: table-cell;
+  width: 100%;
+  vertical-align: top;
+}
+
+.main-item {
+  display: block;
+  text-transform: uppercase;
+  color: $hte-text-color;
+  font-size: 18px;
+  margin-bottom: 15px;
+
+  &:hover {
+    color: #FFF;
+  }
+}
+
+.lg-tabs > li.active > a,
+.lg-tabs > li.active > a:hover,
+.lg-tabs > li.active > a:focus {
+  background: none;
+  color: $hte-text-color;
+  border: 1px solid transparent;
+  font-weight: 600;
+
+}
+
+.lg-tabs > li > a {
+  color: darken($hte-text-color, 5%);
+  text-transform: uppercase;
+  font-size: 24px;
+  border: 1px solid transparent;
+}
+
+.lg-tabs > li > a:hover,
+.lg-tabs > li > a:focus {
+  background: none;
+  border-bottom: none;
+  border: 1px solid transparent;
+}
+
+.tab-content > .tab-pane {
+  padding-top: 30px;
+}
+
+.form-control {
+  background-color: #091138;
+  color: #FFF;
+
+  &:focus {
+    border: 1px solid #99cbff;
+  }
+}
+.btn-primary {
+  background-color: #0f5eb8;
+  border-color: #FFF;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  &:hover, &:focus {
+    border-color: #8292dd;
+    background-color: darken(#0f5eb8, 5%)
+  }
+}
+
+.page-header {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.table-split {
+  width: 100%;
+
+  td {
+    vertical-align: top;
+  }
+
+  td:first-child {
+    width: 40%;
+    padding-right: 40px;
+  }
+  td:last-child {
+    padding-left: 40px;
+    border-left: 1px solid #FFF;
+  }
+}
+
+.nav-ps {
+  font-family: 'ps';
+}
+.nav-ps > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  color: yellow;
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
+.nav-ps > li > a:hover {
+  background: transparent;
+  color: yellow;
+}
+
+.nav-ps > li > a {
+  color: #FFF;
+}
+
+.tab-ps .tab-pane {
+  padding-top: 0;
+}
+
+
+ul.featured {
+  li {
+    font-size: 16px;
+  }
+}
+
+#consoles {
+  overflow: hidden;
+
+  .thumbnail {
+    cursor: pointer;
+    background: transparent;
+    padding-top: 5px;
+    width: 100px;
+    float: left;
+    margin-right: 15px;
+
+    .caption {
+      color: #fff;
+      text-align: center;
+    }
+  }
+  .thumbnail:hover, .thumbnail.active {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.console {
+  overflow: hidden;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  .thumbnail {
+    background: transparent;
+    width: 130px;
+    height: 190px;
+    float: left;
+    text-align: center;
+    color: #FFF;
+    margin-right: 20px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: #fff;
+    }
+    // .span {
+    //   height: 90px;
+    // }
+  }
+}
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+  color: #f47b6e;
+}
+
+.has-success .help-block, .has-success .control-label, .has-success .radio, .has-success .checkbox, .has-success .radio-inline, .has-success .checkbox-inline {
+  color: #6be9a6;
+}
+
+.well {
+  background: transparent;
+}
+
+a {
+  color: yellow;
+
+  &:hover {
+    color: yellow;
+  }
+}
+
+.home_bg {
+  background: image-url('home_bg.png') no-repeat center center;
+  // width: 1096px;
+  // height: 640px;
+}
+.center {
+  text-align: center;
+}
+
+.faq {
+  dt {
+    margin-bottom: 5px;
+  }
+  dd {
+    margin-bottom: 20px;
+
+  }
+}
+
+#table-product {
+  thead {
+    td {
+      vertical-align: middle;
+      font-weight: bold;
+    }
+    td.center {
+      text-align: center;
+    }
+  }
+}

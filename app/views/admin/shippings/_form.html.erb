@@ -1,0 +1,11 @@
+<%= simple_form_for([:admin, @admin_shipping]) do |f| %>
+	<%= f.error_notification %>
+	<div class='form-input'>
+		<%= f.input :name %>
+		<%= f.input :price %>
+	</div>
+	<div class='form-action'>
+		<%= f.button :submit, class: "btn btn-primary" %>
+		<%= link_to 'Cancel', :back %>
+	</div>
+<% end %>

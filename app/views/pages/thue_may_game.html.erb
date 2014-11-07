@@ -1,0 +1,152 @@
+<ul class="nav nav-tabs lg-tabs" role="tablist">
+  <li class="active"><a href="#home" role="tab" data-toggle="tab">Khách Hàng Cá Nhân</a></li>
+  <li><a href="#profile" role="tab" data-toggle="tab">Khách Hàng Doanh Nghiệp</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="home">
+    <section>
+      <h3>Giới Thiệu</h3>
+      <p>Nhằm đáp ứng nhu cầu chơi game tại nhà của các game thủ tại <b>TP.HCM</b>, HTE hân hạnh giới thiệu đến các bạn
+      dịch vụ cho thuê máy <b><i><u>PlayStation 3 (PS3)</u></i></b> và <b><i><u>PlayStation 4 (PS4)</u></i></b> để giải trí tại nhà.
+      Các máy PlayStation của HTE đều đã được cài sẵn <b><u>Game Bản Quyền</u></b> và liên tục được cập nhật các game hay mới nhất. Bạn có thể chơi online hoặc trải nghiệm các ứng dụng có sẵn trong máy như nghe nhạc, xem phim blu-ray, lướt web...</p>
+    </section>
+
+    <section>
+      <h3>Thủ Tục Thuê Máy</h3>
+      <p>Thủ tục nhanh gọn, bạn phải trên 18 tuổi (nếu nhỏ hơn thì nhờ phụ huynh thuê giúp) và có một trong các loại giấy tờ (photo) dưới đây là có thể đặt thuê:</p>
+      <ul>
+        <li><strong>CMND + Hộ Khẩu</strong></li>
+        <li><strong>Hộ Chiếu (Passport) + Hộ Khẩu</strong></li>
+      </ul>
+      <p>Sau khi đã đặt thuê, trong vòng 24h nhân viên HTE sẽ liên hệ và giao máy tại nhà bạn. Bạn hãy chuẩn bị các giấy tờ nêu trên cùng với bản gốc để nhân viên đối chiếu. Sau khi nhân viên kiểm tra thông tin đã khớp với bản gốc, bạn sẽ ký hợp đồng thuê và nhận máy.</p>
+      <p style="color: yellow;">** <i>Nếu không có giấy tờ đầy đủ, bạn có thể đặt cọc tiền và nhận máy tại cửa hàng.</i></p>
+    </section>
+    <section>
+      <h3>Bảng Giá</h3>
+      <table class="table table-bordered" id="table-product">
+        <thead>
+          <tr>
+              <td rowspan="2">Sản phẩm</td>
+              <td colspan="3" class="center">Giá thuê</td>
+          </tr>
+          <tr>
+              <td class="center">3 ngày</td>
+              <td class="center">1 tuần</td>
+              <td class="center">2 tuần</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+            <tr>
+              <td><%= product.long_name %></td>
+              <td class="center"><%= number_to_currency product.pack1_price, unit: 'đ', precision: 0 %></td>
+              <td class="center"><%= number_to_currency product.pack2_price, unit: 'đ', precision: 0 %></td>
+              <td class="center"><%= number_to_currency product.pack3_price, unit: 'đ', precision: 0 %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <h5>Game bản quyền tự chọn theo yêu cầu</h5>
+      <table class="table table-bordered">
+        <tr>
+          <td>Game PS3</td>
+          <td>150.000 đ/game</td>
+        </tr>
+        <tr>
+          <td>Game PS4</td>
+          <td>200.000 đ/game</td>
+        </tr>
+      </table>
+      <h5>Phí Giao Nhận <small style="color: white;">(bao gồm phí giao máy và lấy máy)</small></h5>
+      <p style="color: yellow; font-weight: bold; font-style: italic;">Phí này sẽ được hoàn trả lại nếu khách hàng tự mang máy đến công ty trả khi hết hạn hợp đồng.</p>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <td class="center">Quận</td>
+            <td class="center">Giá</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @ships.each do |ship| %>
+            <tr>
+              <td class="center"><%= ship.name %></td>
+              <td class="center"><%= number_to_currency ship.price, unit: 'đ', precision: 0 %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <h3>Đặt Thuê Máy</h3>
+      <p>Bạn hãy điền đầy đủ thông tin dưới đây, vui lòng gõ tiếng việt có dấu:</p>
+      <%= simple_form_for :quote, url: dat_thue_path, html: {id: 'personal-quote'} do |f| %>
+        <div class="row">
+          <div class="col-xs-4"><%= f.input :name, label: 'Họ Tên', input_html: {:'parsley-required' => true} %></div>
+          <div class="col-xs-3"><%= f.input :phone, label: 'Điện Thoại', input_html: {:'parsley-required' => true} %></div>
+          <div class="col-xs-5"><%= f.input :address, label: 'Địa Chỉ', input_html: {:'parsley-required' => true} %></div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4"><%= f.input :duration, label: 'Thời gian thuê', collection: [["3 ngày", 1], ["1 tuần", 2], ["2 tuần", 3]], input_html: {:'parsley-required' => true} %></div>
+          <div class="col-xs-3">
+            <%= f.input :console_id, label: 'Máy Game', collection: Console.order('name').includes(:product).group_by {|c| c.product.name}, as: :grouped_select, group_method: :last, group_label_method: :first, label_method: :name_with_product, input_html: {:'parsley-required' => true}, hint: link_to('Xem danh sách game', danh_sach_game_path, target: '_blank') %>
+          </div>
+        </div>
+        <%= f.input :note, as: :text, required: false, label: 'Yêu Cầu Thêm (có thể để trống)', input_html: {rows: 4}, placeholder: 'Số lượng tay cầm, phụ kiện, game bạn muốn chơi ...' %>
+        <%= f.submit 'Gửi Đơn Hàng', class: 'btn btn-primary btn-lg' %>
+      <% end %>
+    </section>
+  </div>
+  <div class="tab-pane" id="profile">
+    <section>
+      <div class="row">
+        <div class="col-xs-7">
+          <h3 style="margin-top: 30px;">Tổ chức sự kiện</h3>
+          <ul class="featured">
+            <li>Cung cấp các thiết bị chơi game phục vụ cho các sự kiện.</li>
+            <li>Tư vấn và cung cấp các game phù hợp với mục đích của sự kiện.</li>
+            <li>Nhân viên hỗ trợ kỹ thuật trong suốt quá trình diễn ra sự kiện.</li>
+            <li>Luôn có máy dự phòng, đảm bảo các thiết bị luôn vận hành tốt trong thời gian diễn ra sự kiện.</li>
+          </ul>
+        </div>
+        <div class="col-xs-5">
+          <%= image_tag "event.jpg", class: 'img-responsive' %>
+        </div>
+      </div>
+    </section>
+
+    <hr/>
+
+    <section>
+      <div class="row">
+        <div class="col-xs-5">
+          <%= image_tag "competition.jpg", class: 'img-responsive' %>
+        </div>
+        <div class="col-xs-7">
+          <h3 style="margin-top: 30px;">Tổ chức giải đấu game</h3>
+          <ul class="featured">
+            <li>Cung cấp các thiết bị, phụ kiện game cho các giải đấu game.</li>
+            <li>Nhân viên hỗ trợ kỹ thuật trong suốt quá trình diễn ra giải đấu.</li>
+            <li>Luôn có máy dự phòng, đảm bảo các thiết bị luôn vận hành tốt trong thời gian diễn giải đấu.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr/>
+
+    <section>
+      <h3>Gửi yêu cầu</h3>
+      <p>Bạn hãy điền đầy đủ thông tin dưới đây, vui lòng gõ tiếng việt có dấu:</p>
+      <%= simple_form_for :quote, url: dat_thue_path, html: {id: 'company-quote'} do |f| %>
+        <div class="row">
+          <div class="col-xs-4"><%= f.input :name, label: 'Tên Người Liên Hệ', input_html: {:'parsley-required' => true} %></div>
+          <div class="col-xs-3"><%= f.input :phone, label: 'Điện Thoại', input_html: {:'parsley-required' => true} %></div>
+        </div>
+        <%= f.input :note, as: :text, label: 'Yêu Cầu', input_html: {rows: 8, :'parsley-required' => true}, placeholder: 'Điền thông chi tiết thời gian, địa điểm, mục đích sự kiện/giải đấu hoặc các yêu cầu khác...' %>
+        <%= f.submit 'Gửi Yêu Cầu', class: 'btn btn-primary btn-lg' %>
+      <% end %>
+    </section>
+  </div>
+</div>

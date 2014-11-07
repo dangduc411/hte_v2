@@ -1,0 +1,25 @@
+<% content_for :page_heading do %>
+	Phí Ship
+	<%= link_to new_admin_shipping_path, class: 'btn btn-default pull-right' do %>
+		<i class='fa fa-plus fa-fw'></i>Thêm phí ship
+	<% end %>
+<% end %>
+
+<table class='table table-striped table-bordered table-hover table-data'>
+	<thead>
+		<tr>
+			<th>Quận</th>
+			<th>Giá Tiền</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @admin_shippings.each do |ship| %>
+		<tr>
+			<td><%= link_to ship.name, edit_admin_shipping_path(id: ship) %></td>
+			<td><%= ship.price %></td>
+			<td><%= link_to 'Destroy', admin_shipping_path(id: ship), method: :delete %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

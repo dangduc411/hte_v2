@@ -1,0 +1,34 @@
+<% content_for :page_heading do %>
+  Máy Game
+  <%= link_to new_admin_console_path, class: 'btn btn-default pull-right' do %>
+    <i class="fa fa-plus fa-fw"></i> Tạo Máy Game Mới
+  <% end %>
+<% end %>
+
+<table class="table table-striped table-bordered table-hover table-data">
+  <thead>
+    <tr>
+      <th>Set</th>
+      <th>Tình Trạng</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_consoles.each do |admin_console| %>
+      <tr>
+        <td>
+          <%= link_to "#{admin_console.product.name} - #{admin_console.name}", [:edit, :admin, admin_console] %>
+        </td>
+        <td>
+          <% if admin_console.available %>
+            <span class="label label-success">Còn trống</span>
+          <% else %>
+            <span class="label label-warning">Đang cho thuê</span>
+          <% end %>
+        </td>
+        <td><%= link_to 'Destroy', [:admin, admin_console], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

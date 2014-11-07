@@ -1,0 +1,45 @@
+<%= simple_form_for([:admin, @admin_product]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :long_name %>
+    <%= f.input :slug %>
+    <%= f.input :rental_price %>
+    <%= f.input :selling_price %>
+    <%= f.input :deposit_price %>
+    <%= f.input :pack1_price %>
+    <%= f.input :pack2_price %>
+    <%= f.input :pack3_price %>
+    <%= f.input :sales_price %>
+    <%= f.input :sell_name %>
+    <%= f.input :sellable %>
+    <%= f.input :product_photo do %>
+      <% if @admin_product.product_photo? %>
+        <p>
+          <%= image_tag(@admin_product.product_photo_url) %>
+          <label>
+          <%= f.check_box :remove_product_photo %>
+          Remove photo
+        </label>
+        </p>
+      <% end %>
+      <div class="row">
+        <div class="col-xs-6">
+          <%= f.input_field :product_photo, as: :file, class: 'form-control' %>
+        </div>
+        <div class="col-xs-1">
+          hoặc
+        </div>
+        <div class="col-xs-5">
+          <%= f.input_field :remote_product_photo_url, class: 'form-control', placeholder: 'Photo URL' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', :back %>
+  </div>
+<% end %>

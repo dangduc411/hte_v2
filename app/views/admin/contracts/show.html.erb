@@ -1,0 +1,122 @@
+<% content_for :page_heading do %>
+Hợp đồng #<%= @contract.number %> <span class="label label-default"><%= t @contract.status %></span>
+<%= link_to [:edit, :admin, @contract], class: 'btn btn-default pull-right' do %>
+<i class="fa fa-pencil fa-fw"></i> Chỉnh sửa
+<% end %>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Khách hàng
+      </div>
+      <div class="panel-body">
+        <address>
+          <strong><%= @contract.client.name %></strong>
+          <br><%= @contract.client.address %>
+          <br>
+          <abbr title="Phone">P:</abbr><%= @contract.client.phone %>
+        </address>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Chi tiết
+      </div>
+      <div class="panel-body">
+        <dl>
+          <dt>Thời gian thuê</dt>
+          <dd><%= rental_days[@contract.duration] %></dd>
+          <% if @contract.delivery_date %>
+          <dt>Ngày giao máy</dt>
+          <dd><%= @contract.delivery_date.strftime('%d/%m/%Y') %></dd>
+          <% end %>
+          <% if @contract.complete_date %>
+          <dt>Ngày trả máy</dt>
+          <dd><%= @contract.complete_date.strftime('%d/%m/%Y') %></dd>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Mục hàng
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Mục hàng</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Tổng cộng</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @contract.items.each_with_index do |item, index| %>
+                <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= item.product.name %></td>
+                  <td><%= number_to_currency item.price, unit: 'đ', precision: 0 %></td>
+                  <td><%= item.quantity %></td>
+                  <td><%= number_to_currency (item.price * item.quantity), unit: 'đ', precision: 0 %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Ship</td>
+                <td><%= number_to_currency @contract.ship, unit: 'đ', precision: 0%></td>
+              </tr>
+              <tr>
+                <td colspan="4" style="text-align: right;"><h4>Tổng tiền</h4></td>
+                <td><h4><%= number_to_currency @contract.total, unit: 'đ', precision: 0 %></h4></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Xuất kho
+      </div>
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Mục hàng</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @contract.inventory_items.each_with_index do |item, index| %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= item.name %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+    </div>
+  </div>
+</div>

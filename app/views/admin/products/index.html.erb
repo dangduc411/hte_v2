@@ -1,0 +1,34 @@
+<% content_for :page_heading do %>
+  Sản Phẩm
+  <%= link_to new_admin_product_path, class: 'btn btn-default pull-right' do %>
+    <i class="fa fa-plus fa-fw"></i> Tạo Sản Phẩm Mới
+  <% end %>
+<% end %>
+
+<table class="table table-striped table-bordered table-hover table-data">
+  <thead>
+    <tr>
+      <th>Tên</th>
+      <th>Slug</th>
+      <th>Giá Thuê</th>
+      <th>Giá Bán</th>
+      <th>Giá Đặt Cọc</th>
+      <th>Giá Khuyến Mãi</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_products.each do |admin_product| %>
+      <tr>
+        <td><%= link_to admin_product.name, [:edit, :admin, admin_product] %></td>
+        <td><%= admin_product.slug %></td>
+        <td><%= number_to_currency admin_product.rental_price, unit: 'đ/tuần' , precision: 0%></td>
+        <td><%= number_to_currency admin_product.selling_price %></td>
+        <td><%= number_to_currency admin_product.deposit_price %></td>
+        <td><%= number_to_currency admin_product.sales_price %></td>
+        <td><%= link_to 'Xoá', [:admin, admin_product], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20140912071109_add_sellable_to_products.rb

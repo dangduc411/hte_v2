@@ -1,0 +1,71 @@
+<h1 class="page-header">DANH SÁCH GAME</h1>
+
+<h3>Game cài sẵn trong máy</h3>
+<p>Nhấn vào hình máy game để xem các game cài sẵn.</p>
+<table class="table-split" style="margin-top: 30px;">
+  <tr>
+    <td>
+      <ul class="nav nav-tabs nav-ps" role="tablist">
+        <% @products.each_with_index do |product, index| %>
+            <li class="<%= index == 0 ? 'active' : '' %>"><a href="#<%= product.slug %>" role="tab" data-toggle="tab"><%= product.name %></a></li>
+        <% end %>
+      </ul>
+      <div class="tab-content">
+        <% @products.each_with_index do |product, index| %>
+          <%# if product.sellable == false %>
+            <div class="tab-pane fade in <%= index == 0 ? 'active' : '' %>" id="<%= product.slug %>">
+              <div id="consoles">
+                <% Console.order('name').where(product: product).each do |console| %>
+                  <div class="thumbnail console-ref" data-ref="#<%= dom_id(console) %>">
+                    <%= image_tag product.product_photo.url %>
+                    <div class="caption">
+                      <%= console.name %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <%# end %>
+        <% end %>
+      </div>
+    </td>
+    <td>
+      <div class="tab-content tab-ps">
+        <% Console.includes(:games).each do |console| %>
+          <%= content_tag_for :div, console, style: 'display: none;' do %>
+            <h3><%= console.name_with_product %></h3>
+            <% console.games.each do |game| %>
+              <%= link_to game.psn_link.presence || '#', class: 'thumbnail', target: game.psn_link.present? ? '_blank' : '' do %>
+                <%= image_tag game.poster.url %>
+                <span><%= game.name.truncate(35) %></span>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<% if Game.disc.any? %>
+<h3 style="margin-bottom: 20px;">Đĩa Game PS3</h3>
+<div class="console">
+  <% Game.disc.each do |game| %>
+    <%= link_to game.psn_link.presence || '#', class: 'thumbnail', target: game.psn_link.present? ? '_blank' : '' do %>
+      <%= image_tag game.poster.url %>
+      <span><%= game.name.truncate(35) %></span>
+    <% end %>
+  <% end %>
+</div>
+<% end %>
+
+<script>
+$(function() {
+  $('.console-ref').click(function() {
+    $('.console-ref').removeClass('active');
+    $(this).addClass('active');
+    $('.console').hide();
+    $($(this).data('ref')).show();
+  });
+});
+</script>

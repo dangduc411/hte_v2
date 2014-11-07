@@ -1,0 +1,32 @@
+<% content_for :page_heading do %>
+  Kho
+  <%= link_to new_admin_inventory_item_path, class: 'btn btn-default pull-right' do %>
+    <i class="fa fa-plus fa-fw"></i> Tạo mục kho
+  <% end %>
+<% end %>
+
+<% if @inventory_items.any? %>
+  <table class="table table-striped table-bordered table-hover table-data">
+    <thead>
+      <tr>
+        <th>Tên sản phẩm</th>
+        <th>Số seri</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @inventory_items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, [:edit, :admin, item] %></td>
+          <td><%= item.serial %></td>
+          <td><%= link_to 'Xoá', [:admin, item], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-warning">
+    Chưa có dữ liệu.
+  </div>
+<% end %>

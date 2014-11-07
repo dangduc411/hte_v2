@@ -1,0 +1,8 @@
+<%= simple_form_for([:admin, @inventory_item], html: {multipart: true}) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name, label: 'Tên sản phẩm' %>
+  <%= f.input :serial, label: 'Serial' %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', :back %>
+<% end %>

@@ -1,0 +1,31 @@
+<%= simple_form_for([:admin, @admin_game], html: {multipart: true}) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :name, label: 'Tên game' %>
+  <%= f.input :psn_link, label: 'Link PSN' %>
+  <%= f.input :disc, label: 'Đĩa Game' %>
+  <%= f.input :poster do %>
+    <% if @admin_game.poster? %>
+      <p>
+        <%= image_tag(@admin_game.poster_url) %>
+        <label>
+        <%= f.check_box :remove_poster %>
+        Remove poster
+      </label>
+      </p>
+    <% end %>
+    <div class="row">
+      <div class="col-xs-6">
+        <%= f.input_field :poster, as: :file, class: 'form-control' %>
+      </div>
+      <div class="col-xs-1">
+        hoặc
+      </div>
+      <div class="col-xs-5">
+        <%= f.input_field :remote_poster_url, class: 'form-control', placeholder: 'Poster URL' %>
+      </div>
+    </div>
+  <% end %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', :back %>
+<% end %>

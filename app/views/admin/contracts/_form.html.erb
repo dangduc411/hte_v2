@@ -1,0 +1,88 @@
+<%= simple_nested_form_for([:admin, @contract]) do |f| %>
+  <%= f.error_notification %>
+
+  <% if @quote %>
+    <%= hidden_field_tag :quote_id, @quote.id %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Đơn hàng</div>
+      <div class="panel-body">
+        <p><b>Máy game: </b><%= @quote.console.name_with_product %></p>
+        <% if @quote.note.present? %>
+          <%= simple_format @quote.note %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Thông tin khách hàng</div>
+    <div class="panel-body">
+      <%= f.fields_for :client do |ff| %>
+        <%= ff.input :name, label: 'Tên khách hàng' %>
+        <%= ff.input :phone, label: 'Điện thoại' %>
+        <%= ff.input :address, label: 'Địa chỉ' %>
+      <% end %>
+      <%= f.input :duration, label: 'Thời gian thuê', collection: [["3 Ngày", 1], ["1 Tuần", 2], ["2 Tuần", 3]] %>
+      <%= f.input :delivery_date, as: :string, label: 'Ngày giao máy', input_html: {class: 'datetimepicker', data: {'date-format' => 'YYYY-MM-DD'}} %>
+      <%= f.input :complete_date, as: :string, label: 'Ngày kết thúc', input_html: {class: 'datetimepicker', data: {'date-format' => 'YYYY-MM-DD'}} %>
+      <%= f.input :status, label: 'Trạng thái', collection: [["Chờ xử lý", "pending"], ["Đã giao hàng", "delivered"], ["Đã kết thúc", "completed"]] %>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Mục hàng</div>
+    <div class="panel-body">
+      <table class="table" id="items">
+        <tr>
+          <th>Sản phẩm</th>
+          <th>Đơn giá</th>
+          <th>Số lượng</th>
+          <th></th>
+        </tr>
+        <%= f.fields_for :items, wrapper: false do |ff| %>
+          <tr class="fields">
+            <td><%= ff.input_field :product_id, collection: Product.all, class: 'form-control' %></td>
+            <td><%= ff.input_field :price, class: 'form-control' %></td>
+            <td><%= ff.input_field :quantity, class: 'form-control' %></td>
+            <td><%= ff.link_to_remove 'Xoá' %></td>
+          </tr>
+        <% end %>
+      </table>
+
+      <p><%=  f.link_to_add 'Thêm mục hàng', :items, :data => { :target => "#items" }, class: 'btn btn-default' %></p>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Ship Fee</div>
+    <div class="panel-body">
+      <%= f.input :ship %>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Console</div>
+    <div class="panel-body">
+      <%= f.association :console, as: :radio_buttons, collection: Console.available.order("name"), wrapper: :vertical_radio_and_checkboxes   %>
+    </div>
+  </div>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">Xuất kho</div>
+    <div class="panel-body", style: 'height: 300px;'>
+      <%#= f.input :inventory_item_ids, :as => :check_boxes, :collection => InventoryItem.all.map {|inventory| [inventory.name, inventory.id]}  %>
+      <%= f.association :inventory_items, as: :check_boxes, wrapper: :vertical_radio_and_checkboxes %>
+    </div>
+  </div>
+
+  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', :back %>
+<% end %>
+
+<script>
+  $(function() {
+    $('.datetimepicker').datetimepicker();
+  });
+</script>
