@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20140925081142) do
     t.datetime "updated_at"
   end
 
-  add_index "console_games", ["console_id"], name: "index_console_games_on_console_id"
-  add_index "console_games", ["game_id"], name: "index_console_games_on_game_id"
+  add_index "console_games", ["console_id"], name: "index_console_games_on_console_id", using: :btree
+  add_index "console_games", ["game_id"], name: "index_console_games_on_game_id", using: :btree
 
   create_table "consoles", force: true do |t|
     t.integer  "product_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20140925081142) do
     t.datetime "updated_at"
   end
 
-  add_index "consoles", ["product_id"], name: "index_consoles_on_product_id"
+  add_index "consoles", ["product_id"], name: "index_consoles_on_product_id", using: :btree
 
   create_table "contract_inventory_items", force: true do |t|
     t.integer  "contract_id"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20140925081142) do
     t.datetime "updated_at"
   end
 
-  add_index "contract_inventory_items", ["contract_id"], name: "index_contract_inventory_items_on_contract_id"
-  add_index "contract_inventory_items", ["inventory_item_id"], name: "index_contract_inventory_items_on_inventory_item_id"
+  add_index "contract_inventory_items", ["contract_id"], name: "index_contract_inventory_items_on_contract_id", using: :btree
+  add_index "contract_inventory_items", ["inventory_item_id"], name: "index_contract_inventory_items_on_inventory_item_id", using: :btree
 
   create_table "contract_items", force: true do |t|
     t.integer  "contract_id"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20140925081142) do
     t.datetime "updated_at"
   end
 
-  add_index "contract_items", ["contract_id"], name: "index_contract_items_on_contract_id"
-  add_index "contract_items", ["product_id"], name: "index_contract_items_on_product_id"
+  add_index "contract_items", ["contract_id"], name: "index_contract_items_on_contract_id", using: :btree
+  add_index "contract_items", ["product_id"], name: "index_contract_items_on_product_id", using: :btree
 
   create_table "contracts", force: true do |t|
     t.integer  "client_id"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20140925081142) do
     t.integer  "console_id"
   end
 
-  add_index "contracts", ["client_id"], name: "index_contracts_on_client_id"
+  add_index "contracts", ["client_id"], name: "index_contracts_on_client_id", using: :btree
 
   create_table "games", force: true do |t|
     t.string   "name"
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 20140925081142) do
     t.datetime "updated_at"
   end
 
-  add_index "quotes", ["console_id"], name: "index_quotes_on_console_id"
+  add_index "quotes", ["console_id"], name: "index_quotes_on_console_id", using: :btree
 
   create_table "shippings", force: true do |t|
     t.string   "name"
@@ -146,6 +146,6 @@ ActiveRecord::Schema.define(version: 20140925081142) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
