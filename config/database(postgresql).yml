@@ -8,10 +8,10 @@ default: &default
 
 development:
   <<: *default
-  database: hte
+  database: backloghub_development
 test:
   <<: *default
-  database: hte
+  database: backloghub_test
 production:
   <<: *default
-  database: hte
+  database: backloghub_production
