@@ -40,7 +40,7 @@ class Admin::ContractsController < Admin::BaseController
       format.html { @contract = Contract.find(params[:id]) }
       format.pdf do
         @contract = Contract.find(params[:id])
-        render :pdf => "HopDongSo" +@contract.number, 
+        render :pdf => "HopDongSo" + @contract.number, 
                 :layout => false, 
                 :margin => {:top => 5, :bottom => 10, :left => 10, :right => 10},
                 :show_as_html => params[:debug]
@@ -53,7 +53,7 @@ class Admin::ContractsController < Admin::BaseController
       format.html { @contract = Contract.find(params[:rid]) }
       format.pdf do
         @contract = Contract.find(params[:id])
-        render :pdf => "BienBanSo" +@contract.number, 
+        render :pdf => "BienBanSo" + @contract.number, 
                 :layout => false, 
                 :margin => {:top => 1, :bottom => 10, :left => 10, :right => 10},
                 :show_as_html => params[:debug]
