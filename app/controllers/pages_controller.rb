@@ -8,7 +8,7 @@ class PagesController < ApplicationController
   end
 
   def danh_sach_game
-    @products = Product.where(id: Console.select(:product_id).uniq )
+    @products = Product.where(id: Console.select(:product_id).uniq)
   end
 
   def shop_thiet_bi
